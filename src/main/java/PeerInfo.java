@@ -1,5 +1,6 @@
 public class PeerInfo {
     private String id;
+    private String pseudonyme;
     private int host;
     private int port;
 
