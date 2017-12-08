@@ -5,28 +5,26 @@ import java.util.ArrayList;
 
 public class Peer {
     private final static int portBroadcast = 8888 ;
+    private final static int port = 6666 ;
 
     private String id;
     private String pseudonyme;
     private String host;
-    private int port ;
     private ArrayList<Peer> onlinePeers;
 
     private static DatagramSocket datagramSocket = null;
 
 
-    public Peer(String id, String host, int port){
+    public Peer(String id, String host){
         this.id = id;
         this.host = host;
-        this.port = port;
         this.onlinePeers = new ArrayList<Peer>();
     }
 
-    public Peer(String id, String pseudonyme, String host, int port){
+    public Peer(String id, String pseudonyme, String host){
         this.id = id;
         this.pseudonyme = pseudonyme;
         this.host = host;
-        this.port = port;
         this.onlinePeers = new ArrayList<Peer>();
     }
 
@@ -84,7 +82,6 @@ public class Peer {
     }
 
     //TODO receive
-    // test git pull
     public void receiveBroadcast() throws Exception {
         datagramSocket = new DatagramSocket(portBroadcast);
 

@@ -7,23 +7,23 @@ public class Login extends JFrame{
 
         private static final int DEFAULT_TEXT_FIELD_WIDTH = 10;
 
-        private final JTextField chooseNameTextField = buildInputTextField();
+        private final JTextField nameTextField = buildInputTextField();
 
         public Login() throws Exception{
             super("Chat System");
 
             JLabel chooseNameLabel = new JLabel("Choose a name for you");
-            chooseNameLabel.setLabelFor(chooseNameTextField);
+            chooseNameLabel.setLabelFor(nameTextField);
 
             JButton cancelButton = new JButton("Cancel");
             cancelButton.addActionListener(e -> this.onCancelButtonClicked());
 
             JButton confirmButton = new JButton("Confirm");
-            confirmButton.addActionListener(e -> this.onConfirmButtonClicked());
+            confirmButton.addActionListener(e -> this.onConfirmButtonClicked(this.nameTextField.getText()));
 
             Panel formPanel = new Panel();
             formPanel.add(chooseNameLabel);
-            formPanel.add(chooseNameTextField);
+            formPanel.add(nameTextField);
             formPanel.add(cancelButton);
             formPanel.add(confirmButton);
 
@@ -31,7 +31,7 @@ public class Login extends JFrame{
             add(cancelButton, WEST);
             add(confirmButton, EAST);
 
-            chooseNameTextField.requestFocus();
+            nameTextField.requestFocus();
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         }
@@ -46,7 +46,9 @@ public class Login extends JFrame{
 
         }
 
-        private void onConfirmButtonClicked() {
+        private void onConfirmButtonClicked(String name) {
+
+            Peer user = new Peer(name, name, ,port);
 
         }
 
