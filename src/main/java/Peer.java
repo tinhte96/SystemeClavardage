@@ -84,6 +84,7 @@ public class Peer {
     }
 
     //TODO receive
+    // test git pull
     public void receiveBroadcast() throws Exception {
         datagramSocket = new DatagramSocket(portBroadcast);
 
