@@ -1,6 +1,9 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import static java.awt.BorderLayout.*;
 
 public class Login extends JFrame{
@@ -19,7 +22,14 @@ public class Login extends JFrame{
             cancelButton.addActionListener(e -> this.onCancelButtonClicked());
 
             JButton confirmButton = new JButton("Confirm");
-            confirmButton.addActionListener(e -> this.onConfirmButtonClicked(this.nameTextField.getText()));
+
+            confirmButton.addActionListener(e -> {
+                try {
+                    this.onConfirmButtonClicked(this.nameTextField.getText());
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            });
 
             Panel formPanel = new Panel();
             formPanel.add(chooseNameLabel);
@@ -46,10 +56,17 @@ public class Login extends JFrame{
 
         }
 
-        private void onConfirmButtonClicked(String name) {
+        private void onConfirmButtonClicked(String name) throws Exception {
+            Peer user = new Peer(name, name, InetAddress.getByName("127.0.0.1"));
+            System.out.println("Test construct");
 
-            Peer user = new Peer(name, name, ,port);
+            user.sendBroadcast(user.getPseudonyme());
+            System.out.println("Test broadcast");
 
+            user.receiveBroadcast();
+            System.out.println("Test receive");
+
+            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
 
         private static JTextField buildInputTextField() {

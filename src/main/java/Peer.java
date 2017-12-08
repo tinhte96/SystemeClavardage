@@ -9,26 +9,24 @@ public class Peer {
 
     private String id;
     private String pseudonyme;
-    private String host;
+    private InetAddress host;
     private ArrayList<Peer> onlinePeers;
 
     private static DatagramSocket datagramSocket = null;
 
 
-    public Peer(String id, String host){
+    public Peer(String id, InetAddress host){
         this.id = id;
         this.host = host;
         this.onlinePeers = new ArrayList<Peer>();
     }
 
-    public Peer(String id, String pseudonyme, String host){
+    public Peer(String id, String pseudonyme, InetAddress host){
         this.id = id;
         this.pseudonyme = pseudonyme;
         this.host = host;
         this.onlinePeers = new ArrayList<Peer>();
     }
-
-
 
     public void setId(String id){
         this.id = id;
@@ -36,13 +34,10 @@ public class Peer {
 
     public void setPseudonyme(String pseudonyme) {this.pseudonyme = pseudonyme;}
 
-    public void setHost(String host){
+    public void setHost(InetAddress host){
         this.host = host;
     }
 
-    public void setPort(int port){
-        this.port = port;
-    }
 
     public String getId(){
         return this.id;
@@ -52,7 +47,7 @@ public class Peer {
         return pseudonyme;
     }
 
-    public String getHost(){
+    public InetAddress getHost(){
         return this.host;
     }
 
@@ -83,18 +78,24 @@ public class Peer {
 
     //TODO receive
     public void receiveBroadcast() throws Exception {
+        System.out.println("appel receive broadcast");
         datagramSocket = new DatagramSocket(portBroadcast);
 
         DatagramPacket receivePacket = new DatagramPacket(new byte[500], 500);
+        System.out.println("construct");
+
         datagramSocket.receive(receivePacket);
+        System.out.println("receive");
+        String name = new String(receivePacket.getData()).trim();
+        System.out.println(name);
 
         String info = this.pseudonyme;
-
         byte[] buffer = info.getBytes();
+        System.out.println("send ack");
 
         DatagramPacket ack = new DatagramPacket(buffer, buffer.length, receivePacket.getAddress(), receivePacket.getPort());
         datagramSocket.send(ack);
-
+        System.out.println("ack send ok");
         datagramSocket.close();
     }
 
