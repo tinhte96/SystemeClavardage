@@ -77,7 +77,7 @@ public class Peer {
 
         byte[] data = broadcastMessage.getBytes();
 
-        DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName("255.255.255.255"), 4455);
+        DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName("255.255.255.255"), portBroadcast);
         datagramSocket.send(packet);
 
         datagramSocket.close();
@@ -85,17 +85,17 @@ public class Peer {
 
     //TODO receive
     public void receiveBroadcast() throws Exception {
-        datagramSocket = new DatagramSocket();
+        datagramSocket = new DatagramSocket(portBroadcast);
 
-        DatagramPacket receivePacket = null;
+        DatagramPacket receivePacket = new DatagramPacket(new byte[500], 500);
         datagramSocket.receive(receivePacket);
 
-        String info = "User";
+        String info = this.pseudonyme;
 
         byte[] buffer = info.getBytes();
 
-        DatagramPacket sendPacket = new DatagramPacket(buffer, 0, receivePacket.getAddress(), receivePacket.getPort());
-        datagramSocket.send(sendPacket);
+        DatagramPacket ack = new DatagramPacket(buffer, buffer.length, receivePacket.getAddress(), receivePacket.getPort());
+        datagramSocket.send(ack);
 
         datagramSocket.close();
     }
