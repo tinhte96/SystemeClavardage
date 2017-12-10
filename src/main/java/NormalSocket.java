@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class NormalSocket implements SocketInterface {
@@ -9,7 +10,7 @@ public class NormalSocket implements SocketInterface {
     private InputStream is;
     private OutputStream os;
 
-    public NormalSocket (String host, int port) throws IOException {
+    public NormalSocket (InetAddress host, int port) throws IOException {
         this(new Socket(host,port));
     }
 

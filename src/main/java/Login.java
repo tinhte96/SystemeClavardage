@@ -2,7 +2,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import static java.awt.BorderLayout.*;
 
@@ -57,13 +56,14 @@ public class Login extends JFrame{
         }
 
         private void onConfirmButtonClicked(String name) throws Exception {
-            Peer user = new Peer(name, name, InetAddress.getByName("127.0.0.1"));
+            PeerInfo user = new PeerInfo(name, "127.0.0.1");
+            PeerConnection userConnection = new PeerConnection(user);
             System.out.println("Test construct");
 
-            user.sendBroadcast(user.getPseudonyme());
+            userConnection.sendBroadcast(user.getPseudonyme());
             System.out.println("Test broadcast");
 
-            user.receiveBroadcast();
+            userConnection.receiveBroadcast();
             System.out.println("Test receive");
 
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
