@@ -63,8 +63,8 @@ public class Login extends JFrame{
             userConnection.sendBroadcast(user.getPseudonyme());
             System.out.println("Test broadcast");
 
-            userConnection.receiveBroadcast();
-            System.out.println("Test receive");
+            //userConnection.receiveBroadcast();
+            //System.out.println("Test receive");
 
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }

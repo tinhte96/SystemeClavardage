@@ -8,4 +8,12 @@ public class Node {
     private Hashtable<String, HandlerInterface> handlers;
 
 
+    public void setMyPeer(PeerInfo peerInfo){
+        myPeer = peerInfo;
     }
+
+    @Override
+    public String toString() {
+        return "this node "+myPeer.toString();
+    }
+}

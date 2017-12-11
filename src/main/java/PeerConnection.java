@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 public class PeerConnection {
 
-    private final static int PORT_BROADCAST = 8888 ;
-    private final static int PORT_P2P = 6666 ;
+    public final static int PORT_BROADCAST = 8888 ;
+    public final static int PORT_P2P = 6666 ;
 
     private PeerInfo pd;
     private NormalSocket normalSocket;
@@ -46,7 +46,7 @@ public class PeerConnection {
     public void receiveBroadcast() {
         System.out.println("appel receive broadcast");
         try {
-            datagramSocket = new DatagramSocket(PORT_BROADCAST);
+            datagramSocket = new DatagramSocket(PORT_P2P);
 
             DatagramPacket receivePacket = new DatagramPacket(new byte[64], 64);
             System.out.println("construct");

@@ -30,6 +30,6 @@ public class PeerInfo {
     }
 
     public String toString(){
-        return "pseudo "+this.pseudonyme+ " ("+ this.host +"\n";
+        return "pseudo "+this.pseudonyme+ " ("+ this.host +")\n";
     }
 }
